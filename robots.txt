@@ -1,5 +1,6 @@
+# Allow search engines to crawl all public pages and assets.
 User-agent: *
 Allow: /
 Disallow: /_build/
 
-Sitemap: https://www.your-domain.com/sitemap.xml
+Sitemap: https://www.editpdf.mywire.org/sitemap.xml

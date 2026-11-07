@@ -8,7 +8,11 @@ A fast, static website (no backend, no database). All PDF processing happens in 
 
 ---
 
-## 1. Run it on your computer
+## 1. Current production domain
+
+The canonical production address is **https://www.editpdf.mywire.org/**. The build configuration, canonical tags, Open Graph URLs, JSON-LD, sitemap, robots.txt and web manifest are generated for this exact HTTPS + www host. Do not submit the old Render address to Google Search Console.
+
+## 2. Run it on your computer
 
 1. Install Python 3 from https://www.python.org/downloads/ (tick **Add Python to PATH**).
 2. Double-click **start.bat** → your browser opens http://localhost:8000
@@ -16,10 +20,10 @@ A fast, static website (no backend, no database). All PDF processing happens in 
 
 > You can also double-click index.html to see the styled home page, but page links and tools work best through start.bat (a local web server).
 
-## 2. Before you publish (2 minutes) — set your domain
+## 3. Before you publish (2 minutes) — set your domain
 
 1. Open `_build/config.json` and set:
-   - `"domain"` → your real address, e.g. `"https://www.editpdf.com"` (no trailing slash; use exactly the version — www or non-www — you will open in the browser)
+   - `"domain"` → your real address, e.g. `"https://www.editpdf.mywire.org"` (no trailing slash; use exactly the version — www or non-www — you will open in the browser)
    - `"contact_email"` → the email shown on the Contact page (currently `DocufreePDF223@gmail.com`, taken from your old site — change it if you want)
    - `"google_site_verification"` → the code from Google Search Console (see step 4), or leave empty if you verify another way
    - `"adsense_publisher_id"` → e.g. `"pub-1234567890123456"` once AdSense gives it to you (leave empty until then)
@@ -29,26 +33,26 @@ A fast, static website (no backend, no database). All PDF processing happens in 
 
 Any time you edit text in `_build/content.py` or `_build/build.py`, run build.bat again.
 
-## 3. Hosting
+## 4. Hosting
 
 Works on any static host: Cloudflare Pages, Netlify, GitHub Pages, Vercel, InfinityFree / cPanel (Apache).
 - Cloudflare Pages / Netlify read `_headers` automatically. Apache hosts read `.htaccess`.
 - Use HTTPS (free on all of the above). Pick **one** address (www or non-www) and redirect the other to it.
 - Pages use clean folder URLs such as `/merge-pdf/`, and all work on every host without extra setup.
 
-## 4. Google Search Console — step by step
+## 5. Google Search Console — step by step
 
 1. Go to https://search.google.com/search-console → **Add property**.
-   - Choose **URL prefix** and enter exactly the same address as `"domain"` in config.json (e.g. `https://www.editpdf.com/`). *(Or choose **Domain** and verify by DNS; then you don't need a meta tag.)*
+   - Choose **URL prefix** and enter exactly the same address as `"domain"` in config.json (e.g. `https://www.editpdf.mywire.org/`). *(Or choose **Domain** and verify by DNS; then you don't need a meta tag.)*
 2. Verify ownership — easiest options:
    - **HTML tag**: copy the code from `content="..."` into `google_site_verification` in config.json, run build.bat, upload, then click Verify.
    - **HTML file**: download the file Google gives you and upload it to the site root.
-3. **Sitemaps** (left menu) → type `sitemap.xml` → **Submit**. Status should become **Success**. (On a brand-new site it can say "Couldn't fetch" for a few hours; wait and resubmit — also confirm https://YOUR-DOMAIN/sitemap.xml opens in a browser.)
+3. **Sitemaps** (left menu) → type `sitemap.xml` → **Submit**. Status should become **Success**. (On a brand-new site it can say "Couldn't fetch" for a few hours; wait and resubmit — also confirm https://www.editpdf.mywire.org/sitemap.xml opens in a browser.)
 4. **URL Inspection** (top bar) → paste your home page URL → **Request indexing**. Repeat for your most important pages (merge-pdf, compress-pdf, image-to-pdf…). Google limits these requests, so do a few per day.
 5. Check **Pages** and **Core Web Vitals** reports after a few days to see what is indexed.
 6. Optional but useful: Bing Webmaster Tools (https://www.bing.com/webmasters) → import from Google Search Console. A ready IndexNow key file is included (`e7d3a91c5b2f4086a1c9d4e8f2b70635.txt`); it speeds up Bing/Yandex discovery.
 
-## 5. What was built in for SEO
+## 6. What was built in for SEO
 
 - `sitemap.xml` with every page, absolute URLs, `lastmod`
 - `robots.txt` allowing all crawlers and pointing to the sitemap
@@ -59,7 +63,7 @@ Works on any static host: Cloudflare Pages, Netlify, GitHub Pages, Vercel, Infin
 - Mobile-friendly responsive layout, non-blocking fonts, scripts loaded with `defer` and only the libraries each page needs
 - Favicon set, web manifest, custom 404 (noindex)
 
-## 6. Google AdSense — what to know
+## 7. Google AdSense — what to know
 
 - AdSense reviews sites manually. Approval and traffic can't be guaranteed. Helpful for approval: a real domain, Privacy Policy, About, Contact and Terms pages (all included), and original content.
 - When you have your publisher ID: put it in config.json, run build.bat, upload. This adds the AdSense script to every page, creates `ads.txt`, and switches the Privacy Policy to the AdSense wording. Then enable **Auto ads** in your AdSense account.
@@ -67,7 +71,7 @@ Works on any static host: Cloudflare Pages, Netlify, GitHub Pages, Vercel, Infin
 - Never click your own ads or ask others to.
 - Traffic grows slowly: publish more helpful pages over time (new guides and tools), and get a few genuine links from other sites.
 
-## 7. File map
+## 8. File map
 
 | Path | Purpose |
 |---|---|
@@ -80,3 +84,34 @@ Works on any static host: Cloudflare Pages, Netlify, GitHub Pages, Vercel, Infin
 | `start.bat`, `build.bat` | Windows helpers |
 
 PDF libraries used (loaded from cdnjs): pdf-lib, PDF.js, jsPDF.
+
+
+## EditPDF deployment settings (updated 2026-11-07)
+
+The canonical site address is `https://www.editpdf.mywire.org`. The build configuration,
+all generated page canonicals, Open Graph URLs, structured-data URLs, `robots.txt`, and
+`sitemap.xml` use this address.
+
+After deploying, check these public endpoints in a browser:
+
+- `https://www.editpdf.mywire.org/`
+- `https://www.editpdf.mywire.org/robots.txt`
+- `https://www.editpdf.mywire.org/sitemap.xml`
+
+For Google Search Console, add the URL-prefix property `https://www.editpdf.mywire.org/`,
+verify ownership, then submit `sitemap.xml`. Request indexing for the homepage and important
+tool pages using URL Inspection. Google controls crawling and indexing schedules; a valid
+sitemap improves discovery but cannot guarantee immediate fetching, indexing, ranking, or
+traffic.
+
+For AdSense, do not invent a publisher ID. Once Google approves/assigns your publisher ID,
+set `adsense_publisher_id` in `_build/config.json` to the `pub-...` value and run `build.bat`
+(or `python _build/build.py`) again. The build will add the AdSense script and create
+`ads.txt`. Until then, the site intentionally contains no fake AdSense code or `ads.txt`
+seller declaration. AdSense approval and earnings depend on Google's review, site quality,
+policy compliance, and actual visitors.
+
+
+## Sitemap fetching note
+
+The sitemap and robots.txt are configured with no-cache/no-store headers for supported hosts, and robots.txt points to the exact production sitemap. This helps avoid stale cached copies. Google controls its own crawl and processing schedule, so no code can guarantee immediate fetching or indexing. Before submission, verify that the live sitemap returns HTTP 200, valid XML, and only canonical URLs on this domain.

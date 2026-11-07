@@ -40,7 +40,7 @@ def head(path, title, desc, graph=None, robots=True, og_type='website'):
          '<meta name="viewport" content="width=device-width, initial-scale=1">',
          f'<title>{e(title)}</title>', f'<meta name="description" content="{e(desc)}">']
     if GSC: h.append(f'<meta name="google-site-verification" content="{e(GSC)}">')
-    h += [f'<meta name="robots" content="{rb}">', f'<link rel="canonical" href="{canon}">', '<meta name="theme-color" content="#6857e8">',
+    h += [f'<meta name="robots" content="{rb}">', f'<link rel="canonical" href="{canon}">', '<link rel="sitemap" type="application/xml" href="/sitemap.xml">', '<meta name="theme-color" content="#6857e8">',
           f'<meta property="og:type" content="{og_type}">', f'<meta property="og:site_name" content="{BRAND}">',
           f'<meta property="og:title" content="{e(title)}">', f'<meta property="og:description" content="{e(desc)}">',
           f'<meta property="og:url" content="{canon}">', f'<meta property="og:image" content="{url("/img/og-image.png")}">',
@@ -305,7 +305,7 @@ def build_files():
         sm.append(f'  <url>\n    <loc>{url(p)}</loc>\n    <lastmod>{LASTMOD}</lastmod>\n    <changefreq>{fr}</changefreq>\n    <priority>{pr}</priority>\n  </url>')
     sm.append('</urlset>\n')
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf8').write('\n'.join(sm))
-    open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf8').write(f'User-agent: *\nAllow: /\nDisallow: /_build/\n\nSitemap: {url("/sitemap.xml")}\n')
+    open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf8').write(f'# Allow search engines to crawl all public pages and assets.\nUser-agent: *\nAllow: /\nDisallow: /_build/\n\nSitemap: {url("/sitemap.xml")}\n')
     if ADS: open(os.path.join(ROOT, 'ads.txt'), 'w', encoding='utf8').write(f'google.com, {ADS}, DIRECT, f08c47fec0942fa0\n')
     elif os.path.exists(os.path.join(ROOT, 'ads.txt')): os.remove(os.path.join(ROOT, 'ads.txt'))
     if IKEY: open(os.path.join(ROOT, f'{IKEY}.txt'), 'w', encoding='utf8').write(IKEY)
